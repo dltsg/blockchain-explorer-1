@@ -24,6 +24,12 @@ class Explorer {
     this.app = express();
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
+    // CORS in case you need
+    this.app.use((req, res, next) => {
+       res.set('Access-Control-Allow-Origin', '*');
+       res.set('Access-Control-Allow-Credentials', 'true');
+       next();
+    });
     this.app.use(
       '/api-docs',
       swaggerUi.serve,
